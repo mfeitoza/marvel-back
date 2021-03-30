@@ -7,9 +7,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;  
 import java.util.Date;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.github.javafaker.Faker;
 import com.marvel.marvel.entities.User;
 
@@ -36,6 +35,7 @@ public class UserServiceTest {
 
     User user = userService.create(name, email, password, phone, gender, birthday);
     assertEquals(name, user.getName());
+    assertNotEquals(password, user.getPassword());
     assertNotNull(user.getId());
   }
 }
