@@ -20,20 +20,18 @@ public class UserService {
   @Autowired
   private AuthService authService;
 
-  public Optional<User> create(String name, String email, String password, String phone, String gender,
+  public User create(String name, String email, String password, String phone, String gender,
   Date birthday, List<Document> documents) {
     User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday, documents);
     userRepository.save(user);
-    Optional<User> userData = userRepository.findById(user.getId());
-    return userData;
+    return user;
   }
 
-  public Optional<User> create(String name, String email, String password, String phone, String gender,
+  public User create(String name, String email, String password, String phone, String gender,
   Date birthday) {
     User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday);
     userRepository.save(user);
-    Optional<User> userData = userRepository.findById(user.getId());
-    return userData;
+    return user;
   }
 
   public List<User> findAll() {
