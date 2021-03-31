@@ -1,17 +1,23 @@
 package com.marvel.marvel.services;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.TestInstance.Lifecycle;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.beans.factory.annotation.Autowired;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;  
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import com.github.javafaker.Faker;
 import com.marvel.marvel.entities.User;
+import com.marvel.marvel.repositories.UserRepository;
 
+@TestInstance(Lifecycle.PER_CLASS)
 @SpringBootTest
 public class UserServiceTest {
 
@@ -19,6 +25,12 @@ public class UserServiceTest {
 
   @Autowired
   private UserService userService;
+
+  @Test
+  public void testGetAllUsers() {
+    List<User> users = userService.findAll();
+    assertTrue((users.size() > 0));
+  }
 
   @Test
   public void testCreateUser() throws ParseException {
