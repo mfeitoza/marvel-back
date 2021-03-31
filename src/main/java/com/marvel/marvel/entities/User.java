@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
-import javax.persistence.JoinColumn;
-import javax.persistence.OrderColumn;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
