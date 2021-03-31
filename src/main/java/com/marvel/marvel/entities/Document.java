@@ -2,9 +2,12 @@ package com.marvel.marvel.entities;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -20,10 +23,14 @@ public class Document {
   private String type;
   private String value;
 
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false)
+  private User user;
+
   protected Document() {
   }
 
-  public Document(String id, String type, String value) {
+  public Document(String id, String type, String value, String user_id) {
     this.id = id;
     this.type = type;
     this.value = value;
@@ -33,7 +40,6 @@ public class Document {
     this.type = type;
     this.value = value;
   }
-
 
   public String getId() {
     return this.id;
@@ -53,6 +59,14 @@ public class Document {
 
   public void setValue(String value) {
     this.value = value;
+  }
+
+  public User getUser() {
+    return this.user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
   }
 
   @Override

@@ -1,12 +1,14 @@
 package com.marvel.marvel.entities;
 
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import javax.persistence.JoinColumn;
@@ -23,10 +25,9 @@ public class User {
   @Column(name = "id", updatable = false, nullable = false)
   private String id;
 
-  @OneToMany
-  @JoinColumn(name = "id")
-  @OrderColumn(name = "type")
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Document> documents;
+
   private String name;
   private String email;
   private String password;
@@ -45,7 +46,9 @@ public class User {
     this.phone = phone;
     this.gender = gender;
     this.birthday = birthday;
-    this.documents = documents;
+    this.documents = new ArrayList<Document>();
+    documents.forEach(doc -> doc.setUser(this));
+    this.documents.addAll(documents);
   }
 
   public User(String name, String email, String password, String phone, String gender,
@@ -56,6 +59,7 @@ public class User {
     this.phone = phone;
     this.gender = gender;
     this.birthday = birthday;
+    this.documents = new ArrayList<Document>();
   }
 
   public User(String id, String name, String email, String password, String phone, String gender,
