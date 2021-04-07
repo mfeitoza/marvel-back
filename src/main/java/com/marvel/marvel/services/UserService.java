@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.marvel.marvel.entities.User;
+import com.marvel.marvel.dto.CreateUserDto;
 import com.marvel.marvel.entities.Document;
 import com.marvel.marvel.repositories.UserRepository;
 
@@ -16,20 +17,30 @@ public class UserService {
 
   @Autowired
   private UserRepository userRepository;
-  
+
   @Autowired
   private AuthService authService;
 
   public User create(String name, String email, String password, String phone, String gender,
-  Date birthday, List<Document> documents) {
-    User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday, documents);
+      Date birthday, List<Document> documents) {
+    User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday,
+        documents);
     userRepository.save(user);
     return user;
   }
 
   public User create(String name, String email, String password, String phone, String gender,
-  Date birthday) {
-    User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday);
+      Date birthday) {
+    User user =
+        new User(name, email, authService.encodePassword(password), phone, gender, birthday);
+    userRepository.save(user);
+    return user;
+  }
+
+  public User create(CreateUserDto newUser) {
+    User user = new User(newUser.getName(), newUser.getEmail(),
+        authService.encodePassword(newUser.getPassword()), newUser.getPhone(), newUser.getGender(),
+        newUser.getBirthday());
     userRepository.save(user);
     return user;
   }
@@ -41,5 +52,5 @@ public class UserService {
   public Optional<User> findById(String id) {
     return userRepository.findById(id);
   }
-  
+
 }
