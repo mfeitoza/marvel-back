@@ -33,5 +33,49 @@ public class Course {
   protected Course() {
   }
 
+  //Mexi daqui para baixo (não sei se precisava)
+  public Course(String id, List<CourseClass> classes, String name, Integer workload, String description) {
+    this.id = id;
+    this.classes = classes;
+    this.name = name;
+    this.workload = workload;
+    this.description = description;
+  }
+
+  public String getId() {
+    return id;
+  }
+  
+  public List<CourseClass> getClasses() {
+    return classes;
+  }
+
+  public void setClasses(List<CourseClass> classes) {
+    this.classes = classes;
+  }
+
+  public String getName() {
+    return name;
+  }
+
+  public void setName(String name) {
+    this.name = name;
+  }
+
+  public Integer getWorkload() {
+    return workload;
+  }
+
+  public void setWorkload(Integer workload) {
+    this.workload = workload;
+  }
+
+  public String getDescription() {
+    return description;
+  }
+
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
 }
