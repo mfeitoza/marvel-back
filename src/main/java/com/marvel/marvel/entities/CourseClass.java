@@ -27,27 +27,32 @@ public class CourseClass {
   private Course course;
 
   private String location;
-  private Integer avaliablePlaces;
+  private Integer availablePlaces;
   private Date startDate;
   private Date endDate;
+  private String professorId;
+
 
   protected CourseClass() {
-
   }
 
-  public CourseClass(String id, String location, Integer avaliablePlaces, Date startDate, Date endDate) {
+  public CourseClass(String id, String location, Integer availablePlaces,
+      Date startDate, Date endDate, String courseId, String professorId) {
     this.id = id;
     this.location = location;
-    this.avaliablePlaces = avaliablePlaces;
+    this.availablePlaces = availablePlaces;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.professorId = professorId;
   }
 
-  public CourseClass(String location, Integer avaliablePlaces, Date startDate, Date endDate) {
+  public CourseClass(String location, Integer availablePlaces, Date startDate, Date endDate,
+      String courseId, String professorId) {
     this.location = location;
-    this.avaliablePlaces = avaliablePlaces;
+    this.availablePlaces = availablePlaces;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.professorId = professorId;
   }
 
   public String getId() {
@@ -74,14 +79,6 @@ public class CourseClass {
     this.location = location;
   }
 
-  public Integer getAvaliablePlaces() {
-    return avaliablePlaces;
-  }
-
-  public void setAvaliablePlaces(Integer avaliablePlaces) {
-    this.avaliablePlaces = avaliablePlaces;
-  }
-
   public Date getStartDate() {
     return startDate;
   }
@@ -96,6 +93,22 @@ public class CourseClass {
 
   public void setEndDate(Date endDate) {
     this.endDate = endDate;
+  }
+
+  public Integer getAvailablePlaces() {
+    return availablePlaces;
+  }
+
+  public void setAvailablePlaces(Integer availablePlaces) {
+    this.availablePlaces = availablePlaces;
+  }
+
+  public String getProfessorId() {
+    return professorId;
+  }
+
+  public void setProfessorId(String professorId) {
+    this.professorId = professorId;
   }
 
   @Override

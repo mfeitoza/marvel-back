@@ -4,10 +4,12 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class ClassCourseDto {
+public class CourseClassDto {
   private String id;
   private String location;
-  private Integer avaliablePlaces;
+  private Integer availablePlaces;
   private Date startDate;
   private Date endDate;
+  private String courseId;
+  private String professorId;
 }

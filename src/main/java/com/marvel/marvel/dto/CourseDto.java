@@ -9,5 +9,5 @@ public class CourseDto {
     private String name;
     private String description;
     private Integer workload;
-    private List<ClassCourseDto> courses;
+    private List<CourseClassDto> courses;
 }
