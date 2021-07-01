@@ -10,6 +10,6 @@ public class CourseClassDto {
   private Integer availablePlaces;
   private Date startDate;
   private Date endDate;
-  private String courseId;
+  private CourseOnlyDto course;
   private String professorId;
 }
