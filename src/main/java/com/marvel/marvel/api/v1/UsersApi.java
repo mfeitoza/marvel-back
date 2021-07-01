@@ -47,4 +47,18 @@ public class UsersApi {
       throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
     }
   }
+
+  @GetMapping("/students")
+  @ResponseBody
+  public List<UserDto> listStudents() {
+    List<User> users = userService.findAllStudents();
+    return UtilModelMapper.mapList(users, UserDto.class);
+  }
+
+  @GetMapping("/professors")
+  @ResponseBody
+  public List<UserDto> listProfessors() {
+    List<User> users = userService.findAllProfessors();
+    return UtilModelMapper.mapList(users, UserDto.class);
+  }
 }
