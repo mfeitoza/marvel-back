@@ -11,8 +11,6 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.marvel.marvel.entities.RoleEnum;
@@ -36,8 +34,7 @@ public class User {
   private String phone;
   private String gender;
   private Date birthday;
-  @Enumerated(EnumType.STRING)
-  private RoleEnum role;
+  private String role;
 
   protected User() {
   }
@@ -53,7 +50,7 @@ public class User {
     this.documents = new ArrayList<Document>();
     documents.forEach(doc -> doc.setUser(this));
     this.documents.addAll(documents);
-    this.role = role;
+    this.role = role.toString();
   }
 
   public User(String name, String email, String password, String phone, String gender,
@@ -65,7 +62,7 @@ public class User {
     this.gender = gender;
     this.birthday = birthday;
     this.documents = new ArrayList<Document>();
-    this.role = role;
+    this.role = role.toString();
   }
 
   public User(String id, String name, String email, String password, String phone, String gender,
@@ -78,7 +75,7 @@ public class User {
     this.phone = phone;
     this.gender = gender;
     this.birthday = birthday;
-    this.role = role;
+    this.role = role.toString();
   }
 
 
@@ -142,8 +139,12 @@ public class User {
     this.birthday = birthday;
   }
 
-  public RoleEnum getRole() {
+  public String getRole() {
     return this.role;
+  }
+
+  public void setRole(RoleEnum role) {
+    this.role = role.toString();
   }
 
 

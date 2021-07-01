@@ -50,6 +50,10 @@ public class UserService {
     return userRepository.findAll();
   }
 
+  public List<User> findAllStudents() {
+    return userRepository.findByRole(RoleEnum.student.toString());
+  }
+
   public Optional<User> findById(String id) {
     return userRepository.findById(id);
   }
