@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.marvel.marvel.entities.User;
+import com.marvel.marvel.entities.RoleEnum;
 import com.marvel.marvel.dto.CreateUserDto;
 import com.marvel.marvel.entities.Document;
 import com.marvel.marvel.repositories.UserRepository;
@@ -21,26 +22,26 @@ public class UserService {
   @Autowired
   private AuthService authService;
 
-  public User create(String name, String email, String password, String phone, String gender,
+  public User createStudent(String name, String email, String password, String phone, String gender,
       Date birthday, List<Document> documents) {
     User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday,
-        documents);
+        documents, RoleEnum.student);
     userRepository.save(user);
     return user;
   }
 
-  public User create(String name, String email, String password, String phone, String gender,
+  public User createStudent(String name, String email, String password, String phone, String gender,
       Date birthday) {
     User user =
-        new User(name, email, authService.encodePassword(password), phone, gender, birthday);
+        new User(name, email, authService.encodePassword(password), phone, gender, birthday, RoleEnum.student);
     userRepository.save(user);
     return user;
   }
 
-  public User create(CreateUserDto newUser) {
+  public User createStudent(CreateUserDto newUser) {
     User user = new User(newUser.getName(), newUser.getEmail(),
         authService.encodePassword(newUser.getPassword()), newUser.getPhone(), newUser.getGender(),
-        newUser.getBirthday());
+        newUser.getBirthday(), RoleEnum.student);
     userRepository.save(user);
     return user;
   }

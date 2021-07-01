@@ -13,4 +13,5 @@ public class UserDto {
   private String phone;
   private String gender;
   private Date birthday;
+  private String role;
 }

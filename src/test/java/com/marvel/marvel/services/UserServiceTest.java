@@ -46,7 +46,7 @@ public class UserServiceTest {
     String gender = faker.options().option("female", "male", "other");
     Date birthday = faker.date().between(from, to);
 
-    User user = userService.create(name, email, password, phone, gender, birthday);
+    User user = userService.createStudent(name, email, password, phone, gender, birthday);
 
     assertEquals(name, user.getName());
     assertNotEquals(password, user.getPassword());
@@ -71,7 +71,7 @@ public class UserServiceTest {
 
     List<Document> documents = List.of(doc1, doc2);
 
-    User user = userService.create(name, email, password, phone, gender, birthday, documents);
+    User user = userService.createStudent(name, email, password, phone, gender, birthday, documents);
 
     assertEquals(name, user.getName());
     assertNotEquals(password, user.getPassword());

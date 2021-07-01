@@ -33,7 +33,7 @@ public class UsersApi {
   @PostMapping("/users")
   @ResponseBody
   public UserDto createUser(@RequestBody CreateUserDto newUser) {
-    User user = userService.create(newUser);
+    User user = userService.createStudent(newUser);
     return UtilModelMapper.map(user, UserDto.class);
   }
 

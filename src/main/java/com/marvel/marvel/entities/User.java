@@ -11,7 +11,11 @@ import javax.persistence.Table;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.marvel.marvel.entities.RoleEnum;
 
 @Entity
 @Table(name = "users")
@@ -32,12 +36,14 @@ public class User {
   private String phone;
   private String gender;
   private Date birthday;
+  @Enumerated(EnumType.STRING)
+  private RoleEnum role;
 
   protected User() {
   }
 
   public User(String name, String email, String password, String phone, String gender,
-      Date birthday, List<Document> documents) {
+      Date birthday, List<Document> documents, RoleEnum role) {
     this.name = name;
     this.email = email;
     this.password = password;
@@ -47,10 +53,11 @@ public class User {
     this.documents = new ArrayList<Document>();
     documents.forEach(doc -> doc.setUser(this));
     this.documents.addAll(documents);
+    this.role = role;
   }
 
   public User(String name, String email, String password, String phone, String gender,
-      Date birthday) {
+      Date birthday, RoleEnum role) {
     this.name = name;
     this.email = email;
     this.password = password;
@@ -58,10 +65,11 @@ public class User {
     this.gender = gender;
     this.birthday = birthday;
     this.documents = new ArrayList<Document>();
+    this.role = role;
   }
 
   public User(String id, String name, String email, String password, String phone, String gender,
-      Date birthday, List<Document> documents) {
+      Date birthday, List<Document> documents, RoleEnum role) {
     this.id = id;
     this.documents = documents;
     this.name = name;
@@ -70,6 +78,7 @@ public class User {
     this.phone = phone;
     this.gender = gender;
     this.birthday = birthday;
+    this.role = role;
   }
 
 
@@ -131,6 +140,10 @@ public class User {
 
   public void setBirthday(Date birthday) {
     this.birthday = birthday;
+  }
+
+  public RoleEnum getRole() {
+    return this.role;
   }
 
 
