@@ -2,6 +2,7 @@ package com.marvel.marvel.services;
 
 import java.util.List;
 import java.util.Date;
+import java.util.Optional;
 import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import com.marvel.marvel.dto.CreateCourseClassDto;
@@ -31,5 +32,9 @@ public class CouseClassService {
 
   public List<CourseClass> findAll() {
     return courseClassRepository.findAll();
+  }
+
+  public Optional<CourseClass> findById(String id) {
+    return courseClassRepository.findById(id);
   }
 }
