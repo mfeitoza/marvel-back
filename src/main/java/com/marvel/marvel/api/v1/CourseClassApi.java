@@ -12,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import com.marvel.marvel.dto.CourseClassDto;
+import com.marvel.marvel.dto.CreateCourseClassDto;
 import com.marvel.marvel.entities.CourseClass;
 import com.marvel.marvel.services.CouseClassService;
 import com.marvel.marvel.util.UtilModelMapper;
@@ -27,5 +28,12 @@ public class CourseClassApi {
   public List<CourseClassDto> listCourses() {
     List<CourseClass> courses = courseClassService.findAll();
     return UtilModelMapper.mapList(courses, CourseClassDto.class);
+  }
+
+  @PostMapping("/classes")
+  @ResponseBody
+  public CourseClassDto createCourseClass(@RequestBody CreateCourseClassDto newCourseClass) {
+    CourseClass courseClass = courseClassService.create(newCourseClass);
+    return UtilModelMapper.map(courseClass, CourseClassDto.class);
   }
 }

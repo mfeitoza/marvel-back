@@ -52,6 +52,7 @@ public class CourseClass {
     this.availablePlaces = availablePlaces;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.course = new Course(courseId);
     this.professorId = professorId;
   }
 

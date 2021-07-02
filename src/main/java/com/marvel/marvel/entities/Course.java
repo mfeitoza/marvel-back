@@ -30,6 +30,10 @@ public class Course {
   protected Course() {
   }
 
+  public Course(String id) {
+    this.id = id;
+  }
+  
   public Course(String id, List<CourseClass> classes, String name, Integer workload, String description) {
     this.id = id;
     this.classes = classes;
