@@ -9,6 +9,7 @@ import java.util.Optional;
 import com.marvel.marvel.entities.User;
 import com.marvel.marvel.entities.RoleEnum;
 import com.marvel.marvel.dto.CreateUserDto;
+import com.marvel.marvel.dto.LoginDto;
 import com.marvel.marvel.entities.Document;
 import com.marvel.marvel.repositories.UserRepository;
 
@@ -44,6 +45,16 @@ public class UserService {
         newUser.getBirthday(), RoleEnum.student);
     userRepository.save(user);
     return user;
+  }
+
+  public Optional<User> login(LoginDto credentials) {
+    Optional<User> user = userRepository.findByEmail(credentials.getEmail());
+    if (user.isPresent()) {
+      if (authService.checkPassword(credentials.getPassword(), user.get().getPassword())) {
+        return user;
+      }
+    } 
+    return Optional.empty();
   }
 
   public List<User> findAll() {
