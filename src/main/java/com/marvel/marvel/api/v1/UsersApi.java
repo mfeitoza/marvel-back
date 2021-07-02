@@ -22,18 +22,18 @@ public class UsersApi {
 
   @Autowired
   private UserService userService;
-  
-  @GetMapping("/users")
+
+  @PostMapping("/students")
   @ResponseBody
-  public List<UserDto> listUsers() {
-    List<User> users = userService.findAll();
-    return UtilModelMapper.mapList(users, UserDto.class);
+  public UserDto createStudent(@RequestBody CreateUserDto newUser) {
+    User user = userService.createStudent(newUser);
+    return UtilModelMapper.map(user, UserDto.class);
   }
 
-  @PostMapping("/users")
+  @PostMapping("/professors")
   @ResponseBody
-  public UserDto createUser(@RequestBody CreateUserDto newUser) {
-    User user = userService.createStudent(newUser);
+  public UserDto createProfessor(@RequestBody CreateUserDto newUser) {
+    User user = userService.createProfessor(newUser);
     return UtilModelMapper.map(user, UserDto.class);
   }
 

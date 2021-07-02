@@ -23,26 +23,18 @@ public class UserService {
   @Autowired
   private AuthService authService;
 
-  public User createStudent(String name, String email, String password, String phone, String gender,
-      Date birthday, List<Document> documents) {
-    User user = new User(name, email, authService.encodePassword(password), phone, gender, birthday,
-        documents, RoleEnum.student);
-    userRepository.save(user);
-    return user;
-  }
-
-  public User createStudent(String name, String email, String password, String phone, String gender,
-      Date birthday) {
-    User user =
-        new User(name, email, authService.encodePassword(password), phone, gender, birthday, RoleEnum.student);
-    userRepository.save(user);
-    return user;
-  }
-
   public User createStudent(CreateUserDto newUser) {
     User user = new User(newUser.getName(), newUser.getEmail(),
         authService.encodePassword(newUser.getPassword()), newUser.getPhone(), newUser.getGender(),
         newUser.getBirthday(), RoleEnum.student);
+    userRepository.save(user);
+    return user;
+  }
+
+  public User createProfessor(CreateUserDto newUser) {
+    User user = new User(newUser.getName(), newUser.getEmail(),
+        authService.encodePassword(newUser.getPassword()), newUser.getPhone(), newUser.getGender(),
+        newUser.getBirthday(), RoleEnum.professor);
     userRepository.save(user);
     return user;
   }
