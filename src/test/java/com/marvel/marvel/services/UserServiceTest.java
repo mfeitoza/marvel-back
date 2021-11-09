@@ -14,8 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import com.marvel.marvel.entities.Document;
+import com.marvel.marvel.dto.CreateUserDto;
+import com.marvel.marvel.dto.DocumentDto;
 import com.marvel.marvel.entities.User;
 
 @TestInstance(Lifecycle.PER_CLASS)
@@ -46,7 +46,15 @@ public class UserServiceTest {
     String gender = faker.options().option("female", "male", "other");
     Date birthday = faker.date().between(from, to);
 
-    User user = userService.createStudent(name, email, password, phone, gender, birthday);
+    CreateUserDto newUser = new CreateUserDto();
+    newUser.setName(name);
+    newUser.setPassword(password);
+    newUser.setEmail(email);
+    newUser.setPhone(phone);
+    newUser.setGender(gender);
+    newUser.setBirthday(birthday);
+
+    User user = userService.createStudent(newUser);
 
     assertEquals(name, user.getName());
     assertNotEquals(password, user.getPassword());
@@ -66,12 +74,25 @@ public class UserServiceTest {
     String gender = faker.options().option("female", "male", "other");
     Date birthday = faker.date().between(from, to);
 
-    Document doc1 = new Document("ssn", faker.idNumber().ssnValid());
-    Document doc2 = new Document("id", faker.idNumber().ssnValid());
+    DocumentDto doc1 = new DocumentDto();
+    doc1.setType("ssn");
+    doc1.setValue(faker.idNumber().ssnValid());
+    DocumentDto doc2 = new DocumentDto();
+    doc1.setType("id");
+    doc1.setValue(faker.idNumber().ssnValid());
 
-    List<Document> documents = List.of(doc1, doc2);
+    List<DocumentDto> documents = List.of(doc1, doc2);
 
-    User user = userService.createStudent(name, email, password, phone, gender, birthday, documents);
+    CreateUserDto newUser = new CreateUserDto();
+    newUser.setName(name);
+    newUser.setPassword(password);
+    newUser.setEmail(email);
+    newUser.setPhone(phone);
+    newUser.setGender(gender);
+    newUser.setBirthday(birthday);
+    newUser.setDocuments(documents);
+
+    User user = userService.createStudent(newUser);
 
     assertEquals(name, user.getName());
     assertNotEquals(password, user.getPassword());
