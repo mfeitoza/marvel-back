@@ -2,7 +2,6 @@ package com.marvel.marvel.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,7 +9,6 @@ import com.marvel.marvel.entities.User;
 import com.marvel.marvel.entities.RoleEnum;
 import com.marvel.marvel.dto.CreateUserDto;
 import com.marvel.marvel.dto.LoginDto;
-import com.marvel.marvel.entities.Document;
 import com.marvel.marvel.repositories.UserRepository;
 
 

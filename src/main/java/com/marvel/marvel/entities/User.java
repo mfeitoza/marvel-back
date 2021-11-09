@@ -13,8 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import org.hibernate.annotations.GenericGenerator;
 
-import com.marvel.marvel.entities.RoleEnum;
-
 @Entity
 @Table(name = "users")
 public class User {
