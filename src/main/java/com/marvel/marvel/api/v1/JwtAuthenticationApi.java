@@ -48,7 +48,6 @@ public class JwtAuthenticationApi {
 	@RequestMapping(value = "/authenticate", method = RequestMethod.POST)
   public ResponseEntity<?> login(@RequestBody LoginDto credentials) {
     Optional<User> user = userService.login(credentials);
-		System.out.println(credentials);
     if (user.isPresent()) {
 			String token = jwtTokenUtil.generateToken(user.get().getEmail());
 			return ResponseEntity.ok(new JwtResponse(token));
