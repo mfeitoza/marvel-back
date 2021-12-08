@@ -35,6 +35,11 @@ public class ClassEnrollment {
   @JoinColumn(name = "class_id", referencedColumnName = "id")
   private CourseClass courseClass;
 
+  private Integer test_1;
+  private Integer test_2;
+  private Integer assignment_1;
+  private Integer assignment_2;
+
   public String getId() {
     return this.id;
   }
@@ -77,6 +82,39 @@ public class ClassEnrollment {
 
   public void setCourseClass(CourseClass courseClass) {
     this.courseClass = courseClass;
+  }
+
+
+  public Integer getTest_1() {
+    return this.test_1;
+  }
+
+  public void setTest_1(Integer test_1) {
+    this.test_1 = test_1;
+  }
+
+  public Integer getTest_2() {
+    return this.test_2;
+  }
+
+  public void setTest_2(Integer test_2) {
+    this.test_2 = test_2;
+  }
+
+  public Integer getAssignment_1() {
+    return this.assignment_1;
+  }
+
+  public void setAssignment_1(Integer assignment_1) {
+    this.assignment_1 = assignment_1;
+  }
+
+  public Integer getAssignment_2() {
+    return this.assignment_2;
+  }
+
+  public void setAssignment_2(Integer assignment_2) {
+    this.assignment_2 = assignment_2;
   }
 
   @Override
