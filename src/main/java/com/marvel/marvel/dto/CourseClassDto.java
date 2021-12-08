@@ -11,5 +11,5 @@ public class CourseClassDto {
   private Date startDate;
   private Date endDate;
   private CourseOnlyDto course;
-  private String professorId;
+  private UserDto professor;
 }

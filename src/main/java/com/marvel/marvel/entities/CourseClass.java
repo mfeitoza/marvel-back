@@ -8,7 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -30,8 +32,10 @@ public class CourseClass {
   private Integer availablePlaces;
   private Date startDate;
   private Date endDate;
-  private String professorId;
-
+  
+  @OneToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name = "professor_id", referencedColumnName = "id")
+  private User professor;
 
   protected CourseClass() {
   }
@@ -43,7 +47,6 @@ public class CourseClass {
     this.availablePlaces = availablePlaces;
     this.startDate = startDate;
     this.endDate = endDate;
-    this.professorId = professorId;
   }
 
   public CourseClass(String location, Integer availablePlaces, Date startDate, Date endDate,
@@ -53,7 +56,6 @@ public class CourseClass {
     this.startDate = startDate;
     this.endDate = endDate;
     this.course = new Course(courseId);
-    this.professorId = professorId;
   }
 
   public String getId() {
@@ -70,6 +72,15 @@ public class CourseClass {
 
   public void setCourse(Course course) {
     this.course = course;
+  }
+
+
+  public User getProfessor() {
+    return this.professor;
+  }
+
+  public void setProfessor(User professor) {
+    this.professor = professor;
   }
 
   public String getLocation() {
@@ -102,14 +113,6 @@ public class CourseClass {
 
   public void setAvailablePlaces(Integer availablePlaces) {
     this.availablePlaces = availablePlaces;
-  }
-
-  public String getProfessorId() {
-    return professorId;
-  }
-
-  public void setProfessorId(String professorId) {
-    this.professorId = professorId;
   }
 
   @Override
