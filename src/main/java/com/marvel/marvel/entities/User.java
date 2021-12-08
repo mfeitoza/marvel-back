@@ -26,6 +26,9 @@ public class User {
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
   private List<Document> documents;
 
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private List<ClassEnrollment> enrollments;
+
   private String name;
   private String email;
   private String password;
@@ -88,6 +91,19 @@ public class User {
   public void setDocuments(List<Document> documents) {
     this.documents = documents;
   }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public List<ClassEnrollment> getEnrollments() {
+    return this.enrollments;
+  }
+
+  public void setEnrollments(List<ClassEnrollment> enrollments) {
+    this.enrollments = enrollments;
+  }
+
 
   public String getName() {
     return this.name;
