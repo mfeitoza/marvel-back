@@ -15,6 +15,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 
 @Configuration
@@ -51,22 +54,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	@Override
-	protected void configure(HttpSecurity httpSecurity) throws Exception {
+	protected void configure(HttpSecurity http) throws Exception {
 		// We don't need CSRF for this example
-		httpSecurity.cors().and().csrf().disable()
-				// dont authenticate this particular request
-				.authorizeRequests()
-				.antMatchers(HttpMethod.POST, "/authenticate").permitAll()
-				//.antMatchers(HttpMethod.POST, "/students").permitAll()
-				//.antMatchers(HttpMethod.POST, "/professors").permitAll()
-				// all other requests need to be authenticated
-				.anyRequest().authenticated().and().
-				// make sure we use stateless session; session won't be used to
-				// store user's state.
-				exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+		http
+			.cors()
+			.and().csrf().disable()
+			// dont authenticate this particular request
+			.authorizeRequests()
+			.antMatchers(HttpMethod.POST, "/authenticate").permitAll()
+			//.antMatchers(HttpMethod.POST, "/students").permitAll()
+			//.antMatchers(HttpMethod.POST, "/professors").permitAll()
+			// all other requests need to be authenticated
+			.anyRequest().authenticated().and().
+			// make sure we use stateless session; session won't be used to
+			// store user's state.
+			exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint).and().sessionManagement()
+			.sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Add a filter to validate the tokens with every request
-		httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+	}
+
+	@Bean
+	CorsConfigurationSource corsConfigurationSource() {
+			UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+			source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
+			return source;
 	}
 }
