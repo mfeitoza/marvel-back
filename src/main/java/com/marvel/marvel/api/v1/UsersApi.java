@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 import com.marvel.marvel.dto.UserDto;
@@ -60,5 +62,17 @@ public class UsersApi {
   public List<UserDto> listProfessors() {
     List<User> users = userService.findAllProfessors();
     return UtilModelMapper.mapList(users, UserDto.class);
+  }
+
+  @GetMapping("/user-info")
+  @ResponseBody
+  public UserDto userByToken(Principal principal) {
+    String email = principal.getName();
+    Optional<User> user = userService.findByEmail(email);
+    if (user.isPresent()) {
+      return UtilModelMapper.map(user.get(), UserDto.class);
+    } else {
+      throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found");
+    }
   }
 }
