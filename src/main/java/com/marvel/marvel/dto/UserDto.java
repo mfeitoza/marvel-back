@@ -8,6 +8,7 @@ import java.util.Date;
 public class UserDto {
   private String id;
   private List<DocumentDto> documents;
+  private List<ClassEnrollmentDto> enrollments;
   private String name;
   private String email;
   private String phone;
